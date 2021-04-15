@@ -24,7 +24,7 @@ class User {
     created_at!: Date;
 
     constructor() {
-        if (!this.id) {
+        if (this!.id == undefined || this.id == null) {
             this.id = uuid();
         }
     }
