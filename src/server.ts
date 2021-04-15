@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import express from "express";
 import "./database";
+import routes from "./routes";
 
 const app = express();
 const PORT = 3333;
@@ -23,6 +24,7 @@ function logRequests(
 }
 
 app.use(logRequests);
+app.use(routes);
 
 app.listen(PORT, () => {
     console.log("Backend started on port:", PORT);
