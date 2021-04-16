@@ -27,7 +27,7 @@ class SendMailController {
         try {
             await schema.validate(request.body, { abortEarly: false });
         } catch (error) {
-            throw new AppError(JSON.stringify(error));
+            throw new AppError(error);
         }
 
         const user = await usersRepository.findOne({ email });
