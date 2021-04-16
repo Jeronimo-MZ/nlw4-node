@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import { resolve } from "path";
+import * as yup from "yup";
 
 import { SurveysRepository } from "../repositories/SurveysRepository";
 import { SurveysUsersRepository } from "../repositories/SurveysUsersRepository";
@@ -17,6 +18,17 @@ class SendMailController {
         const surveysUsersRepository = getCustomRepository(
             SurveysUsersRepository
         );
+
+        const schema = yup.object().shape({
+            email: yup.string().required(),
+            survey_id: yup.string().required(),
+        });
+
+        try {
+            await schema.validate(request.body, { abortEarly: false });
+        } catch (error) {
+            throw new AppError(JSON.stringify(error));
+        }
 
         const user = await usersRepository.findOne({ email });
 
