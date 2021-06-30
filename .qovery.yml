@@ -1,0 +1,11 @@
+---
+application:
+  name: "nlw4-node"
+  project: "GoBarber"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-nlw4-node"
+  routes:
+  - application_name: "nlw4-node"
+    paths:
+    - "/*"
